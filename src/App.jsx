@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom'; 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -9,6 +9,8 @@ import Membership from '../pages/Membership';
 import Department from '../pages/Department';
 import Team from '../pages/Team';
 import Join from '../pages/Join';
+import Outgoing from '../pages/Outgoing';
+import Incoming from '../pages/Incoming';
 import LoadingScreen from '../components/LoadingScreen';
 
 export default function App() {
@@ -32,6 +34,8 @@ export default function App() {
             <Route path="/department" element={<Department />} />
             <Route path="/team" element={<Team />} />
             <Route path="/join" element={<Join />} />
+            <Route path="/testimonials/outgoing" element={<Outgoing />} />
+            <Route path="/testimonials/incoming" element={<Incoming />} />
           </Routes>
           <Footer />
         </>
