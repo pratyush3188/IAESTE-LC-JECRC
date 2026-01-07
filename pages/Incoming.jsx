@@ -437,11 +437,19 @@ export default function Incoming() {
           <div className="flex-1 flex justify-center lg:justify-end">
             <img
               src="https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?_gl=1*1sip93w*_ga*MjE5OTI2MzIzLjE3NTM4ODU2NDU.*_ga_8JE65Q40S6*czE3NjU0NDM5NjQkbzExJGcwJHQxNzY1NDQzOTY0JGo2MCRsMCRoMA.."
+<<<<<<< HEAD
               alt="International students and incoming exchange interns"
               width="256"
               height="192"
               loading="lazy"
+=======
+              alt="incoming"
+              width="256"
+              height="192"
+>>>>>>> 3cc2688c368d6eb02e6e35346d66b654175d3358
               className="w-64 h-48 object-cover rounded-2xl shadow-md"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -618,7 +626,11 @@ export default function Incoming() {
                         <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50 opacity-40 z-0">
                           {/* decorative svg omitted for brevity */}
                         </div>
+<<<<<<< HEAD
                         <img src={story.image} alt={`${story.name} - ${story.location}`} width="160" height="192" loading="lazy" className="w-full h-full object-cover relative z-10" />
+=======
+                        <img src={story.image} alt={story.name} width="400" height="400" className="w-full h-full object-cover relative z-10" loading="lazy" decoding="async" />
+>>>>>>> 3cc2688c368d6eb02e6e35346d66b654175d3358
                       </div>
                     </div>
 
@@ -671,7 +683,11 @@ export default function Incoming() {
                         <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50 opacity-40 z-0">
                           {/* decorative svg omitted for brevity */}
                         </div>
+<<<<<<< HEAD
                         <img src={story.image} alt={`${story.name} - ${story.location}`} width="160" height="192" loading="lazy" className="w-full h-full object-cover relative z-10" />
+=======
+                        <img src={story.image} alt={story.name} width="400" height="400" className="w-full h-full object-cover relative z-10" loading="lazy" decoding="async" />
+>>>>>>> 3cc2688c368d6eb02e6e35346d66b654175d3358
                       </div>
                     </div>
 
