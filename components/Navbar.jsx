@@ -14,7 +14,7 @@ export default function Navbar() {
   const [departmentMobileDropdown, setDepartmentMobileDropdown] = useState(false);
   const [testimonialsMobileDropdown, setTestimonialsMobileDropdown] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  
+
   const location = useLocation();
   const aboutTimeoutRef = useRef(null);
   const galleryTimeoutRef = useRef(null);
@@ -66,17 +66,35 @@ export default function Navbar() {
   }, []);
 
   // ==================== HELPER FUNCTIONS ====================
+  const closeAllDropdowns = () => {
+    setAboutDropdown(false);
+    setGalleryDropdown(false);
+    setDepartmentDropdown(false);
+    setTestimonialsDropdown(false);
+    // Clear all timeouts
+    if (aboutTimeoutRef.current) clearTimeout(aboutTimeoutRef.current);
+    if (galleryTimeoutRef.current) clearTimeout(galleryTimeoutRef.current);
+    if (departmentTimeoutRef.current) clearTimeout(departmentTimeoutRef.current);
+    if (testimonialsTimeoutRef.current) clearTimeout(testimonialsTimeoutRef.current);
+  };
+
   const handleDropdownEnter = (setDropdown, timeoutRef) => {
+    // Close all other dropdowns first
+    closeAllDropdowns();
+    // Clear timeout if exists
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
+    // Open the current dropdown
     setDropdown(true);
   };
 
   const handleDropdownLeave = (setDropdown, timeoutRef) => {
     timeoutRef.current = setTimeout(() => {
       setDropdown(false);
-    }, 200);
+      timeoutRef.current = null;
+    }, 300);
   };
 
   const closeMobileMenu = () => {
@@ -94,9 +112,8 @@ export default function Navbar() {
     return (
       <Link
         to={to}
-        className={`relative text-gray-700 hover:text-[#003F68] transition-all duration-300 font-semibold text-base lg:text-lg ${
-          isActive ? 'text-[#003F68]' : ''
-        }`}
+        className={`relative text-gray-700 hover:text-[#003F68] transition-all duration-300 font-semibold text-base lg:text-lg ${isActive ? 'text-[#003F68]' : ''
+          }`}
       >
         {label}
         {isActive && (
@@ -108,10 +125,10 @@ export default function Navbar() {
 
   // Dropdown Arrow Icon
   const DropdownArrow = ({ isOpen }) => (
-    <svg 
-      className={`w-4 h-4 ml-1 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
-      fill="none" 
-      stroke="currentColor" 
+    <svg
+      className={`w-4 h-4 ml-1 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+      fill="none"
+      stroke="currentColor"
       viewBox="0 0 24 24"
     >
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -119,12 +136,12 @@ export default function Navbar() {
   );
 
   // Desktop Dropdown Component
-  const DesktopDropdown = ({ 
-    isOpen, 
-    setIsOpen, 
-    timeoutRef, 
-    buttonLabel, 
-    children 
+  const DesktopDropdown = ({
+    isOpen,
+    setIsOpen,
+    timeoutRef,
+    buttonLabel,
+    children
   }) => (
     <div
       className="relative h-full flex items-center"
@@ -135,11 +152,15 @@ export default function Navbar() {
         {buttonLabel}
         <DropdownArrow isOpen={isOpen} />
       </button>
-      
+
       {isOpen && (
         <>
           <div className="absolute top-full left-0 w-full h-2"></div>
-          <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-2 animate-fade-in-down overflow-hidden z-50">
+          <div 
+            className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-2 animate-fade-in-down overflow-hidden z-50"
+            onMouseEnter={() => handleDropdownEnter(setIsOpen, timeoutRef)}
+            onMouseLeave={() => handleDropdownLeave(setIsOpen, timeoutRef)}
+          >
             {children}
           </div>
         </>
@@ -149,8 +170,8 @@ export default function Navbar() {
 
   // Dropdown Link Item
   const DropdownLink = ({ to, children }) => (
-    <Link 
-      to={to} 
+    <Link
+      to={to}
       className="block px-4 py-2.5 text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-[#003F68] hover:pl-6 transition-all duration-300 rounded-md"
     >
       {children}
@@ -161,14 +182,13 @@ export default function Navbar() {
   const MobileNavLink = ({ to, icon, children, onClick }) => {
     const isActive = location.pathname === to;
     return (
-      <Link 
-        to={to} 
+      <Link
+        to={to}
         onClick={onClick}
-        className={`flex items-center px-5 py-4 rounded-xl text-base font-semibold transition-all duration-300 mb-2 ${
-          isActive
-            ? 'bg-gradient-to-r from-[#003F68]/10 to-[#003F68]/5 text-[#003F68] shadow-sm'
-            : 'text-gray-700 hover:bg-gray-50/80 hover:text-[#003F68]'
-        }`}
+        className={`flex items-center px-5 py-4 rounded-xl text-base font-semibold transition-all duration-300 mb-2 ${isActive
+          ? 'bg-gradient-to-r from-[#003F68]/10 to-[#003F68]/5 text-[#003F68] shadow-sm'
+          : 'text-gray-700 hover:bg-gray-50/80 hover:text-[#003F68]'
+          }`}
       >
         {icon && <span className="mr-3">{icon}</span>}
         <span>{children}</span>
@@ -177,21 +197,20 @@ export default function Navbar() {
   };
 
   // Mobile Dropdown Component
-  const MobileDropdown = ({ 
-    isOpen, 
-    setIsOpen, 
-    label, 
-    icon, 
-    children 
+  const MobileDropdown = ({
+    isOpen,
+    setIsOpen,
+    label,
+    icon,
+    children
   }) => (
     <div className="mb-2">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between px-5 py-4 rounded-xl text-base font-semibold transition-all duration-300 ${
-          isOpen 
-            ? 'bg-gradient-to-r from-[#003F68]/10 to-[#003F68]/5 text-[#003F68] shadow-sm' 
-            : 'text-gray-700 hover:bg-gray-50/80 hover:text-[#003F68]'
-        }`}
+        className={`w-full flex items-center justify-between px-5 py-4 rounded-xl text-base font-semibold transition-all duration-300 ${isOpen
+          ? 'bg-gradient-to-r from-[#003F68]/10 to-[#003F68]/5 text-[#003F68] shadow-sm'
+          : 'text-gray-700 hover:bg-gray-50/80 hover:text-[#003F68]'
+          }`}
       >
         <div className="flex items-center space-x-3">
           {icon}
@@ -211,14 +230,13 @@ export default function Navbar() {
   const MobileDropdownLink = ({ to, children, onClick }) => {
     const isActive = location.pathname === to;
     return (
-      <Link 
-        to={to} 
+      <Link
+        to={to}
         onClick={onClick}
-        className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
-          isActive
-            ? 'bg-[#003F68]/10 text-[#003F68]'
-            : 'text-gray-600 hover:bg-[#003F68]/5 hover:text-[#003F68]'
-        }`}
+        className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${isActive
+          ? 'bg-[#003F68]/10 text-[#003F68]'
+          : 'text-gray-600 hover:bg-[#003F68]/5 hover:text-[#003F68]'
+          }`}
       >
         <span className="w-1.5 h-1.5 rounded-full bg-[#003F68] mr-3"></span>
         {children}
@@ -263,6 +281,12 @@ export default function Navbar() {
     </svg>
   );
 
+  const HomeIcon = () => (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+    </svg>
+  );
+
   const HamburgerIcon = ({ isOpen }) => (
     <svg className={`w-6 h-6 transition-transform duration-300 ${isOpen ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
       {isOpen ? (
@@ -275,29 +299,35 @@ export default function Navbar() {
 
   // ==================== RENDER ====================
   return (
-    <nav className={`bg-white border-b-2 border-gray-300 sticky top-0 z-50 font-sans transition-all duration-300 ${
-      scrolled ? 'shadow-lg' : 'shadow-sm'
-    }`}>
+    <nav className={`bg-white border-b-2 border-gray-300 sticky top-0 z-50 font-sans transition-all duration-300 ${scrolled ? 'shadow-lg' : 'shadow-sm'
+      }`}>
       <div className="max-w-7xl mx-auto px-8 sm:px-12 lg:px-16">
         <div className="flex items-center justify-between h-20">
-          
+
           {/* Logo */}
           <Link to="/" className="flex items-center group -ml-8 lg:-ml-12">
-            <img 
-              src={logo} 
-              alt="IAESTE Logo" 
+            <img
+              src={logo}
+              alt="IAESTE Logo"
+              width="200"
+              height="80"
               className="h-20 w-auto object-contain group-hover:scale-105 transition-all duration-300 ease-out"
+              loading="eager"
+              fetchPriority="high"
             />
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+            <NavItem to="/" label="Home" />
+
             <DesktopDropdown
               isOpen={aboutDropdown}
               setIsOpen={setAboutDropdown}
               timeoutRef={aboutTimeoutRef}
               buttonLabel="About"
             >
+              <DropdownLink to="/benefits">Benefits</DropdownLink>
               <DropdownLink to="/faq">FAQ</DropdownLink>
               <DropdownLink to="/contact">Contact</DropdownLink>
             </DesktopDropdown>
@@ -308,11 +338,12 @@ export default function Navbar() {
               timeoutRef={galleryTimeoutRef}
               buttonLabel="Gallery"
             >
-              <DropdownLink to="/gallery/rhythm">Rhythm</DropdownLink>
-              <DropdownLink to="/gallery/membership-drive">Membership Drive</DropdownLink>
+              <DropdownLink to="/gallery">Gallery</DropdownLink>
+              <DropdownLink to="/brochure">Brochure</DropdownLink>
+              <DropdownLink to="/testimonials">Testimonials</DropdownLink>
             </DesktopDropdown>
 
-            <NavItem to="/membership" label="Membership" />
+            <NavItem to="/employers" label="Employers" />
 
             <DesktopDropdown
               isOpen={departmentDropdown}
@@ -320,6 +351,7 @@ export default function Navbar() {
               timeoutRef={departmentTimeoutRef}
               buttonLabel="Department"
             >
+              <DropdownLink to="/department">Departments</DropdownLink>
               <DropdownLink to="/team">Team</DropdownLink>
             </DesktopDropdown>
 
@@ -334,20 +366,20 @@ export default function Navbar() {
             </DesktopDropdown>
           </div>
 
-          {/* Apply Now Button (Desktop) */}
+          {/* Join Membership Button (Desktop) */}
           <div className="hidden md:flex items-center ml-6 -mr-8 lg:-mr-12">
             <Link
-              to="/apply"
+              to="/membership"
               className="relative bg-[#003F68] text-white px-6 py-2.5 rounded-md hover:bg-[#003F68] transition-all duration-300 shadow-md hover:shadow-xl font-semibold text-base tracking-wide transform hover:-translate-y-1 hover:scale-105 overflow-hidden group"
             >
-              <span className="relative z-10">Apply now</span>
+              <span className="relative z-10">Avail Membership</span>
               <span className="absolute inset-0 bg-[#003F68] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-gray-700 hover:text-[#003F68] focus:outline-none p-2 transition-all duration-300 hover:scale-110"
             >
@@ -359,72 +391,82 @@ export default function Navbar() {
 
       {/* Mobile Menu Backdrop */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 top-20"
           onClick={closeMobileMenu}
         ></div>
       )}
 
       {/* Mobile Slide-in Menu */}
-      <div className={`md:hidden fixed top-20 right-0 h-[calc(100vh-5rem)] w-80 max-w-[85vw] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-out ${
-        isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div className={`md:hidden fixed top-20 right-0 h-[calc(100vh-5rem)] w-80 max-w-[85vw] bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
         <div className="flex flex-col h-full overflow-y-auto bg-gradient-to-b from-white via-gray-50/30 to-white">
           <div className="flex-1 px-3 py-6">
+            <MobileNavLink
+              to="/"
+              icon={<HomeIcon />}
+              onClick={closeMobileMenu}
+            >
+              Home
+            </MobileNavLink>
+
             <MobileDropdown
               isOpen={aboutMobileDropdown}
               setIsOpen={setAboutMobileDropdown}
               label="About"
               icon={<InfoIcon />}
             >
+              <MobileDropdownLink to="/benefits" onClick={closeMobileMenu}>Benefits</MobileDropdownLink>
               <MobileDropdownLink to="/faq" onClick={closeMobileMenu}>FAQ</MobileDropdownLink>
               <MobileDropdownLink to="/contact" onClick={closeMobileMenu}>Contact</MobileDropdownLink>
             </MobileDropdown>
-            
+
             <MobileDropdown
               isOpen={galleryMobileDropdown}
               setIsOpen={setGalleryMobileDropdown}
               label="Gallery"
               icon={<GalleryIcon />}
             >
-              <MobileDropdownLink to="/gallery/rhythm" onClick={closeMobileMenu}>Rhythm</MobileDropdownLink>
-              <MobileDropdownLink to="/gallery/membership-drive" onClick={closeMobileMenu}>Membership Drive</MobileDropdownLink>
+              <MobileDropdownLink to="/gallery" onClick={closeMobileMenu}>Gallery</MobileDropdownLink>
+              <MobileDropdownLink to="/brochure" onClick={closeMobileMenu}>Brochure</MobileDropdownLink>
+              <MobileDropdownLink to="/testimonials" onClick={closeMobileMenu}>Testimonials</MobileDropdownLink>
             </MobileDropdown>
-            
-            <MobileNavLink to="/membership" icon={<UsersIcon />} onClick={closeMobileMenu}>
-              Membership
+
+            <MobileNavLink to="/employers" icon={<UsersIcon />} onClick={closeMobileMenu}>
+              Employers
             </MobileNavLink>
-            
+
             <MobileDropdown
               isOpen={departmentMobileDropdown}
               setIsOpen={setDepartmentMobileDropdown}
               label="Department"
               icon={<BuildingIcon />}
             >
+              <MobileDropdownLink to="/department" onClick={closeMobileMenu}>Departments</MobileDropdownLink>
               <MobileDropdownLink to="/team" onClick={closeMobileMenu}>Team</MobileDropdownLink>
             </MobileDropdown>
 
             <MobileDropdown
               isOpen={testimonialsMobileDropdown}
               setIsOpen={setTestimonialsMobileDropdown}
-              label="Testimonials"
+              label="Stats"
               icon={<ChatIcon />}
             >
               <MobileDropdownLink to="/testimonials/outgoing" onClick={closeMobileMenu}>Outgoing</MobileDropdownLink>
               <MobileDropdownLink to="/testimonials/incoming" onClick={closeMobileMenu}>Incoming</MobileDropdownLink>
             </MobileDropdown>
           </div>
-          
-          {/* Apply Now Button - Fixed at Bottom */}
+
+          {/* Join Membership Button - Fixed at Bottom */}
           <div className="p-5 pt-3 border-t border-gray-200/80 bg-gradient-to-b from-white via-gray-50/50 to-white backdrop-blur-sm">
-            <Link 
-              to="/apply" 
+            <Link
+              to="/membership"
               onClick={closeMobileMenu}
               className="group relative block w-full text-center bg-[#003F68] text-white px-6 py-4 rounded-xl font-bold text-base hover:bg-[#003F68] active:scale-[0.98] transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden"
             >
               <span className="relative z-10 flex items-center justify-center">
                 <CheckIcon />
-                <span className="ml-2">Apply Now</span>
+                <span className="ml-2">Avail Membership</span>
               </span>
               <span className="absolute inset-0 bg-[#003F68] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
             </Link>

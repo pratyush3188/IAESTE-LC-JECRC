@@ -63,6 +63,42 @@ function Counter({ target = 0, duration = 1200, play = true, className = "" }) {
 }
 
 export default function Outgoing() {
+  // SEO: Update document title and meta tags
+  useEffect(() => {
+    document.title = "Outgoing Exchange Programs | IAESTE LC JECRC";
+    
+    // Update or create meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Explore IAESTE outgoing exchange programs at JECRC. View statistics, success stories, and international internship opportunities for students.');
+    
+    // Update or create Open Graph tags
+    const ogTags = {
+      'og:title': 'Outgoing Exchange Programs | IAESTE LC JECRC',
+      'og:description': 'Explore IAESTE outgoing exchange programs at JECRC. View statistics, success stories, and international internship opportunities for students.',
+      'og:type': 'website',
+      'og:url': window.location.href
+    };
+    
+    Object.entries(ogTags).forEach(([property, content]) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    });
+
+    // Cleanup function to restore original title if needed
+    return () => {
+      document.title = 'iaestelcjecrc.com';
+    };
+  }, []);
 
   const successStories = [
     {
@@ -122,7 +158,7 @@ export default function Outgoing() {
   ];
 
   const data = [
-    { year: "2013-14", countries: [], students: 2 },
+    { year: "2013-14", countries: ["Vernsania"], students: 2 },
     { year: "2014-15", countries: ["Iran", "Lebanon", "Oman"], students: 9 },
     { year: "2015-16", countries: ["Germany", "Iran"], students: 2 },
     {
@@ -298,6 +334,8 @@ export default function Outgoing() {
               src="https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               alt="Plane"
               className="w-64 h-48 object-cover rounded-2xl shadow-md lg:mr-[-15px]"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -429,11 +467,15 @@ export default function Outgoing() {
                       open ? "opacity-100 max-h-40" : "opacity-0 max-h-0"
                     } md:group-hover:opacity-100 md:group-hover:max-h-40`}
                   >
-                    {item.countries.map((c, idx) => (
-                      <span key={idx} className="bg-[#003F68] text-white text-sm px-3 py-1 rounded-full">
-                        {c}
-                      </span>
-                    ))}
+                    {item.countries.length > 0 ? (
+                      item.countries.map((c, idx) => (
+                        <span key={idx} className="bg-[#003F68] text-white text-sm px-3 py-1 rounded-full">
+                          {c}
+                        </span>
+                      ))
+                    ) : (
+                      <p className="text-sm text-gray-500 italic">No country data available for this year</p>
+                    )}
                   </div>
                 </div>
               );

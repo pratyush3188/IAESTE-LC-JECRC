@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Carousel from '../components/Carousel';
 import StatisticsCharts from '../components/StatisticsCharts';
+import HowToApply from '../components/HowToApply';
+import Stepper, { Step } from '../components/Stepper';
 import homeImage from '../src/assets/images/home.jpg';
 import agraImage from '../src/assets/images/Agra.jpg';
 import dinnerImage from '../src/assets/images/Dinner.jpg';
@@ -130,8 +132,8 @@ export default function Home() {
       <Carousel slides={slides} />
       
       {/* Who we are & Why IAESTE Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 xl:gap-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           {/* Who we are Section - Left */}
           <div className="space-y-8">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 tracking-tight">Who we are</h2>
@@ -151,15 +153,19 @@ export default function Home() {
             </div>
             
             {/* Image Carousel */}
-            <div className="pt-6 relative overflow-hidden rounded-lg border-4 border-[#003F68] shadow-xl" style={{ height: '500px' }}>
+            <div className="pt-4 relative overflow-hidden rounded-lg border-4 border-[#003F68] shadow-xl" style={{ minHeight: '300px', height: 'auto' }}>
               {imageCarousel.map((image, index) => (
                 <img 
                   key={index}
                   src={image} 
                   alt={`IAESTE ${index + 1}`} 
-                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                  width="800"
+                  height="600"
+                  className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out ${
                     index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
                   }`}
+                  loading="lazy"
+                  decoding="async"
                 />
               ))}
             </div>
@@ -298,12 +304,9 @@ export default function Home() {
                   <p className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">
                     <span className="text-[#003F68]">₹2,900</span>
                   </p>
-                  <p className="text-sm text-gray-500 mb-4">
+                  <p className="text-sm text-gray-500">
                     Valid till graduation
                   </p>
-                  <button className="w-full bg-[#003F68] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#005a8f] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                    Buy Now
-                  </button>
                 </div>
               </div>
             </motion.div>
@@ -350,12 +353,9 @@ export default function Home() {
                   <p className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">
                     <span className="text-[#003F68]">₹2,000</span>
                   </p>
-                  <p className="text-sm text-gray-500 mb-4">
+                  <p className="text-sm text-gray-500">
                     Per Year
                   </p>
-                  <button className="w-full bg-[#003F68] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#005a8f] transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                    Buy Now
-                  </button>
                 </div>
               </div>
             </motion.div>
@@ -373,6 +373,93 @@ export default function Home() {
               </svg>
             </Link>
           </div>
+        </div>
+      </div>
+
+      {/* How to Apply Section 
+       <HowToApply />
+      */}
+      
+      <div className="bg-gradient-to-br from-gray-50 via-white to-gray-50 py-6 sm:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+            className="text-center mb-3 sm:mb-4"
+          >
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-gray-800 mb-3 tracking-tight" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              HOW TO APPLY FOR AN IAESTE INTERNSHIP
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 font-normal" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+              3 simple steps and you're good to go!
+            </p>
+          </motion.div>
+
+          {/* Stepper Component */}
+          <Stepper
+            initialStep={1}
+            onStepChange={(step) => {
+              console.log(`Step ${step}`);
+            }}
+            onFinalStepCompleted={() => console.log("All steps completed!")}
+            backButtonText="Previous"
+            nextButtonText="Next"
+          >
+            <Step>
+              <div className="text-center py-1">
+                <div className="flex justify-center mb-2">
+                  <div className="w-12 h-12 bg-[#003F68]/10 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-[#003F68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Click on "Join Membership"
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-md mx-auto" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  You will get to see it in the starting of the website. Look for the "Join Membership" button in the navigation bar at the top of the page.
+                </p>
+              </div>
+            </Step>
+            <Step>
+              <div className="text-center py-1">
+                <div className="flex justify-center mb-2">
+                  <div className="w-12 h-12 bg-[#003F68]/10 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-[#003F68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Pay the Membership Fee
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-md mx-auto" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Submit the fee through our secure online payment portal. Choose between INSTATION (₹2,900) or OUTSTATION (₹2,000) membership based on your university.
+                </p>
+              </div>
+            </Step>
+            <Step>
+              <div className="text-center py-1">
+                <div className="flex justify-center mb-2">
+                  <div className="w-12 h-12 bg-[#003F68]/10 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-[#003F68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-base sm:text-lg font-semibold text-gray-800 mb-1" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Get Full Access
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-md mx-auto" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  Receive access to all the internship offers and application forms. Start exploring international opportunities and apply for internships that match your skills and interests.
+                </p>
+              </div>
+            </Step>
+          </Stepper>
         </div>
       </div>
 
