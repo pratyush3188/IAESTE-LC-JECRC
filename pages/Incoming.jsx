@@ -63,6 +63,42 @@ function Counter({ target = 0, duration = 2000, play = true, className = "" }) {
 }
 
 export default function Incoming() {
+  // SEO: Update document title and meta tags
+  useEffect(() => {
+    document.title = "Incoming Exchange Programs | IAESTE LC JECRC";
+    
+    // Update or create meta description
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Explore IAESTE incoming exchange programs at JECRC. View statistics, success stories, and international interns hosted at our university.');
+    
+    // Update or create Open Graph tags
+    const ogTags = {
+      'og:title': 'Incoming Exchange Programs | IAESTE LC JECRC',
+      'og:description': 'Explore IAESTE incoming exchange programs at JECRC. View statistics, success stories, and international interns hosted at our university.',
+      'og:type': 'website',
+      'og:url': window.location.href
+    };
+    
+    Object.entries(ogTags).forEach(([property, content]) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    });
+
+    // Cleanup function to restore original title if needed
+    return () => {
+      document.title = 'iaestelcjecrc.com';
+    };
+  }, []);
   
  const data = [
     { year: "2013-14", countries: [], students: 0 },
@@ -259,6 +295,7 @@ export default function Incoming() {
       name: "Doaa",
       location: "Palestine",
       testimonial:"My two-month IAESTE internship at JECRC University in civil engineering was transformative. I explored bamboo as a sustainable building material, gained cultural insights, and formed lasting bonds. The warmth and generosity of Indian people made India my second home. From academic growth to exploring iconic sites like the Taj Mahal, this enriching journey will remain unforgettable.",
+      linkedin: "#",
       email: "#",
       image: "https://www.iaestelcjecrc.com/assets/img/avatars/doaa.jpg"
     }
@@ -400,7 +437,7 @@ export default function Incoming() {
           <div className="flex-1 flex justify-center lg:justify-end">
             <img
               src="https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?_gl=1*1sip93w*_ga*MjE5OTI2MzIzLjE3NTM4ODU2NDU.*_ga_8JE65Q40S6*czE3NjU0NDM5NjQkbzExJGcwJHQxNzY1NDQzOTY0JGo2MCRsMCRoMA.."
-              alt="incoming"
+              alt="International students and incoming exchange interns"
               width="256"
               height="192"
               width="400"
@@ -544,11 +581,15 @@ export default function Incoming() {
                     className={`flex flex-wrap gap-2 mt-3 transition-all duration-150 ease-out overflow-hidden
                       ${expanded ? "opacity-100 max-h-40" : "opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-40"}`}
                   >
-                    {item.countries.map((c, i) => (
-                      <span key={i} className="bg-[#003F68] text-white text-sm px-3 py-1 rounded-full">
-                        {c}
-                      </span>
-                    ))}
+                    {item.countries.length > 0 ? (
+                      item.countries.map((c, i) => (
+                        <span key={i} className="bg-[#003F68] text-white text-sm px-3 py-1 rounded-full">
+                          {c}
+                        </span>
+                      ))
+                    ) : (
+                      <p className="text-sm text-gray-500 italic">No country data available for this year</p>
+                    )}
                   </div>
                 </div>
               );
