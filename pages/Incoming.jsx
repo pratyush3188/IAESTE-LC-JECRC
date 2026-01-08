@@ -440,8 +440,9 @@ export default function Incoming() {
               alt="International students and incoming exchange interns"
               width="256"
               height="192"
-              loading="lazy"
-              className="w-64 h-48 object-cover rounded-2xl shadow-md"
+              width="400"
+              height="300"
+              className="w-[400px] h-[300px] object-cover rounded-2xl shadow-md"
               loading="lazy"
               decoding="async"
             />
@@ -616,11 +617,11 @@ export default function Incoming() {
                   <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 transition-all duration-300 flex flex-col md:flex-row gap-6 relative max-w-6xl mx-auto">
                     {/* profile image */}
                     <div className="shrink-0 mx-auto md:mx-0">
-                      <div className="w-40 h-48 md:w-32 md:h-40 rounded-2xl overflow-hidden border-4 border-[#003F68] relative mx-auto">
+                      <div className="w-[250px] h-[250px] rounded-2xl overflow-hidden border-4 border-[#003F68] relative mx-auto">
                         <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50 opacity-40 z-0">
                           {/* decorative svg omitted for brevity */}
                         </div>
-                        <img src={story.image} alt={`${story.name} - ${story.location}`} width="160" height="192" loading="lazy" className="w-full h-full object-cover relative z-10" />
+                        <img src={story.image} alt={story.name} width="250" height="250" className="w-[250px] h-[250px] object-cover relative z-10" loading="lazy" decoding="async" />
                       </div>
                     </div>
 
@@ -669,11 +670,11 @@ export default function Incoming() {
                   <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100 transition-all duration-300 flex flex-col md:flex-row gap-6 relative max-w-6xl mx-auto">
                     {/* profile image */}
                     <div className="shrink-0 mx-auto md:mx-0">
-                      <div className="w-40 h-48 md:w-32 md:h-40 rounded-2xl overflow-hidden border-4 border-[#003F68] relative mx-auto">
+                      <div className="w-[250px] h-[250px] rounded-2xl overflow-hidden border-4 border-[#003F68] relative mx-auto">
                         <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50 opacity-40 z-0">
                           {/* decorative svg omitted for brevity */}
                         </div>
-                        <img src={story.image} alt={`${story.name} - ${story.location}`} width="160" height="192" loading="lazy" className="w-full h-full object-cover relative z-10" />
+                        <img src={story.image} alt={story.name} width="250" height="250" className="w-[250px] h-[250px] object-cover relative z-10" loading="lazy" decoding="async" />
                       </div>
                     </div>
 
