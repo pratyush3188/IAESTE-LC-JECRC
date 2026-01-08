@@ -158,7 +158,7 @@ export default function Outgoing() {
   ];
 
   const data = [
-    { year: "2013-14", countries: [], students: 2 },
+    { year: "2013-14", countries: ["Vernsania"], students: 2 },
     { year: "2014-15", countries: ["Iran", "Lebanon", "Oman"], students: 9 },
     { year: "2015-16", countries: ["Germany", "Iran"], students: 2 },
     {

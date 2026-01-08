@@ -327,6 +327,7 @@ export default function Navbar() {
               timeoutRef={aboutTimeoutRef}
               buttonLabel="About"
             >
+              <DropdownLink to="/benefits">Benefits</DropdownLink>
               <DropdownLink to="/faq">FAQ</DropdownLink>
               <DropdownLink to="/contact">Contact</DropdownLink>
             </DesktopDropdown>
@@ -415,6 +416,7 @@ export default function Navbar() {
               label="About"
               icon={<InfoIcon />}
             >
+              <MobileDropdownLink to="/benefits" onClick={closeMobileMenu}>Benefits</MobileDropdownLink>
               <MobileDropdownLink to="/faq" onClick={closeMobileMenu}>FAQ</MobileDropdownLink>
               <MobileDropdownLink to="/contact" onClick={closeMobileMenu}>Contact</MobileDropdownLink>
             </MobileDropdown>
