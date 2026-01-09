@@ -194,8 +194,6 @@ export default function Outgoing() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [chartType, setChartType] = useState("line");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortBy, setSortBy] = useState("year"); // 'year' or 'students'
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [playCounters] = useState(true);
   const [openCards, setOpenCards] = useState({});
@@ -243,24 +241,7 @@ export default function Outgoing() {
   const nextBottomCard = () => setBottomIndex((prev) => (prev + 1) % totalBottomCards);
   const prevBottomCard = () => setBottomIndex((prev) => (prev - 1 + totalBottomCards) % totalBottomCards);
 
-  const filteredData = data
-    .filter((item) => {
-      const searchLower = searchTerm.toLowerCase();
-      return (
-        item.year.toLowerCase().includes(searchLower) ||
-        item.countries.some((country) => country.toLowerCase().includes(searchLower)) ||
-        item.students.toString().includes(searchLower)
-      );
-    })
-    .sort((a, b) => {
-      if (sortBy === "year") {
-        const aNum = parseInt(a.year.slice(0, 4).replace(/\D/g, "")) || 0;
-        const bNum = parseInt(b.year.slice(0, 4).replace(/\D/g, "")) || 0;
-        return aNum - bNum;
-      } else {
-        return b.students - a.students;
-      }
-    });
+  const filteredData = data;
   const lineOptions = {
     responsive: true,
     maintainAspectRatio: true,
@@ -397,11 +378,17 @@ export default function Outgoing() {
             />
           )}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
           <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
             <p className="text-sm text-gray-600 mb-1">Total Interns</p>
             <p className="text-2xl font-bold text-[#003F68]">
               <Counter target={totalInterns} duration={1600} play={playCounters} />
+            </p>
+          </div>
+          <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
+            <p className="text-sm text-gray-600 mb-1">Average per Year</p>
+            <p className="text-2xl font-bold text-[#003F68]">
+              <Counter target={avgPerYear} duration={1400} play={playCounters} />
             </p>
           </div>
           <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
@@ -458,7 +445,6 @@ export default function Outgoing() {
           ) : (
             <div className="col-span-2 text-center py-12">
               <p className="text-gray-500 text-lg">No results found</p>
-              <button onClick={() => setSearchTerm("")} className="mt-4 text-[#003F68] hover:underline">Clear search</button>
             </div>
           )}
         </div>

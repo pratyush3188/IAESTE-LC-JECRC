@@ -523,31 +523,11 @@ export default function Incoming() {
         </div>
       </section>
       <section className="max-w-6xl mx-auto mt-12 p-6">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-          <div>
-            <h2 className="text-2xl font-bold text-[#003F68]">Incoming Exchange Records</h2>
-            <p className="text-gray-600 mt-1">
-              Total incoming : <span className="font-semibold"><Counter target={totalInterns} duration={1600} play={playCounters} /></span>
-            </p>
-          </div>
-
-          <div className="flex w-full md:w-auto flex-col md:flex-row gap-3 md:items-center">
-            <input
-              type="text"
-              placeholder="Search by year, country..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003F68]"
-            />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="w-full md:w-auto px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003F68] bg-white"
-            >
-              <option value="year">Sort by Year</option>
-              <option value="students">Sort by Students (High to Low)</option>
-            </select>
-          </div>
+        <div>
+          <h2 className="text-2xl font-bold text-[#003F68]">Incoming Exchange Records</h2>
+          <p className="text-gray-600 mt-1">
+            Total incoming : <span className="font-semibold"><Counter target={totalInterns} duration={1600} play={playCounters} /></span>
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 mt-8">
