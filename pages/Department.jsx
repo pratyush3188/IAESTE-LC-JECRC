@@ -18,10 +18,14 @@ export default function Department() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 mb-4 sm:mb-6">
-            Meet the departments powering IAESTE LC JECRC.
+            Meet the departments powering
+            <br />
+            <span className="text-[#003F68]">IAESTE LC JECRC.</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Our dedicated teams work together to provide exceptional support and opportunities for students seeking international experiences.
+            Each department plays a unique role in building global opportunities
+            for students – from corporate outreach and international offers to
+            cultural reception, PR, and tech.
           </p>
         </div>
 
