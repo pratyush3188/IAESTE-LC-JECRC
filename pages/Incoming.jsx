@@ -509,17 +509,11 @@ export default function Incoming() {
             />
           )}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
             <p className="text-sm text-gray-600 mb-1">Total Incoming</p>
             <p className="text-2xl font-bold text-[#003F68]">
               <Counter target={totalInterns} duration={1600} play={playCounters} />
-            </p>
-          </div>
-          <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
-            <p className="text-sm text-gray-600 mb-1">Average per Year</p>
-            <p className="text-2xl font-bold text-[#003F68]">
-              <Counter target={avgPerYear} duration={1400} play={playCounters} />
             </p>
           </div>
           <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
@@ -635,11 +629,6 @@ export default function Incoming() {
                         {story.testimonial}
                       </p>
 
-                      <div className="flex flex-col sm:flex-row gap-3 mb-2 mt-4 md:mt-0 justify-center md:justify-start">
-                        <a href={story.linkedin} className="bg-[#003F68] text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-[#005a8f] transition text-center">Linkedin</a>
-                        <a href={`mailto:${story.email}`} className="bg-[#003F68] text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-[#005a8f] transition text-center">Email</a>
-                      </div>
-
                       <div className="flex gap-2 justify-end mt-auto">
                         <button onClick={prevTopCard} className="bg-gray-200 hover:bg-gray-300 text-gray-700 p-2 rounded-lg transition-all duration-300 hover:scale-110" aria-label="Previous">
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -687,11 +676,6 @@ export default function Incoming() {
                       <p className="text-base text-gray-700 leading-relaxed mb-6 flex-1">
                         {story.testimonial}
                       </p>
-
-                      <div className="flex flex-col sm:flex-row gap-3 mb-2 mt-4 md:mt-0 justify-center md:justify-start">
-                        <a href={story.linkedin} className="bg-[#003F68] text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-[#005a8f] transition text-center">Linkedin</a>
-                        <a href={`mailto:${story.email}`} className="bg-[#003F68] text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-[#005a8f] transition text-center">Email</a>
-                      </div>
 
                       <div className="flex gap-2 justify-end mt-auto">
                         <button onClick={prevBottomCard} className="bg-gray-200 hover:bg-gray-300 text-gray-700 p-2 rounded-lg transition-all duration-300 hover:scale-110" aria-label="Previous bottom">
