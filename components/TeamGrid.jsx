@@ -55,9 +55,7 @@ export default function TeamGrid() {
                 <img
                   src={advisor.img}
                   alt={advisor.name}
-                  width="300"
-                  height="375"
-                  className="w-[300px] h-[375px] object-cover"
+                  className="w-full h-full object-cover object-center"
                   loading="lazy"
                   decoding="async"
                   onError={(e) => {
