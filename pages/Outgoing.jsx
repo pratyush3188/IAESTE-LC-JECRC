@@ -316,8 +316,8 @@ export default function Outgoing() {
               alt="Plane"
               width="256"
               height="192"
-              width="400"
-              height="300"
+              // width="400"
+              // height="300"
               className="w-[400px] h-[300px] object-cover rounded-2xl shadow-md lg:mr-[-15px]"
               loading="lazy"
               decoding="async"
@@ -382,19 +382,14 @@ export default function Outgoing() {
             />
           )}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
             <p className="text-sm text-gray-600 mb-1">Total Interns</p>
             <p className="text-2xl font-bold text-[#003F68]">
               <Counter target={totalInterns} duration={1600} play={playCounters} />
             </p>
           </div>
-          <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
-            <p className="text-sm text-gray-600 mb-1">Average per Year</p>
-            <p className="text-2xl font-bold text-[#003F68]">
-              <Counter target={avgPerYear} duration={1400} play={playCounters} />
-            </p>
-          </div>
+          
           <div className="bg-[#EAF4FF] rounded-xl p-4 text-center">
             <p className="text-sm text-gray-600 mb-1">Peak Year</p>
             <p className="text-2xl font-bold text-[#003F68]">{peakYear}</p>
