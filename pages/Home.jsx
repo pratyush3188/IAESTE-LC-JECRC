@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Carousel from '../components/Carousel';
@@ -6,24 +6,9 @@ import StatisticsCharts from '../components/StatisticsCharts';
 import HowToApply from '../components/HowToApply';
 import Stepper, { Step } from '../components/Stepper';
 import homeImage from '../src/assets/images/home.jpg';
-import agraImage from '../src/assets/images/Agra.jpg';
-import dinnerImage from '../src/assets/images/Dinner.jpg';
 
 export default function Home() {
-  // Image carousel for "Who we are" section
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const imageCarousel = [agraImage, dinnerImage, homeImage];
-
-  // Auto-rotate images
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % imageCarousel.length);
-    }, 4000); // Change image every 4 seconds
-
-    return () => clearInterval(interval);
-  }, [imageCarousel.length]);
-
-  // Carousel slides data with background images
+  // Carousel slides data with home image repeated
   const slides = [
     {
       id: 1,
@@ -34,26 +19,6 @@ export default function Home() {
       buttonLink: "/apply",
       backgroundImage: homeImage,
       fallbackGradient: "linear-gradient(135deg, #003F68 0%, #005a8f 100%)",
-    },
-    {
-      id: 2,
-      title: "Global Opportunities",
-      subtitle: "Expand Your Horizons",
-      description: "Join thousands of students who have gained valuable international work experience through our exchange programs.",
-      buttonText: "Learn More",
-      buttonLink: "/benefits",
-      backgroundImage: agraImage,
-      fallbackGradient: "linear-gradient(135deg, #1e3a5f 0%, #003F68 100%)",
-    },
-    {
-      id: 3,
-      title: "Build Your Future",
-      subtitle: "Professional Development",
-      description: "Develop essential skills, build international networks, and enhance your career prospects with IAESTE.",
-      buttonText: "Get Started",
-      buttonLink: "/membership",
-      backgroundImage: dinnerImage,
-      fallbackGradient: "linear-gradient(135deg, #003F68 0%, #1e3a5f 100%)",
     },
   ];
 
@@ -152,20 +117,15 @@ export default function Home() {
               </p>
             </div>
             
-            {/* Image Carousel */}
+            {/* Single Image Display */}
             <div className="pt-4 relative overflow-hidden rounded-lg border-4 border-[#003F68] shadow-xl w-full" style={{ minHeight: '300px', height: '400px' }}>
-              {imageCarousel.map((image, index) => (
-                <img 
-                  key={index}
-                  src={image} 
-                  alt={`IAESTE ${index + 1}`} 
-                  className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out ${
-                    index === currentImageIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
-                  }`}
-                  loading="lazy"
-                  decoding="async"
-                />
-              ))}
+              <img 
+                src={homeImage} 
+                alt="IAESTE LC JECRC" 
+                className="w-full h-full object-contain"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
           
