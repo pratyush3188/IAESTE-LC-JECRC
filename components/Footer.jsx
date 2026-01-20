@@ -100,7 +100,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
           
           {/* Logo and Description Section */}
-          <div className="col-span-2 md:col-span-1 lg:col-span-1 text-center md:text-left -ml-8 lg:-ml-12">
+          <div className="col-span-2 md:col-span-1 lg:col-span-1 text-center md:text-left -ml-8 lg:-ml-12 pl-4 sm:pl-6 md:pl-0">
             <Link to="/" className="flex items-center justify-center md:justify-start mb-2 sm:mb-4">
               <img 
                 src={whiteLogo} 
@@ -112,11 +112,11 @@ export default function Footer() {
               />
             </Link>
             
-            <p className="text-white font-bold text-xs sm:text-base mb-2 sm:mb-3">
+            <p className="text-white font-bold text-xs sm:text-base mb-2 sm:mb-3 pl-2 sm:pl-4 md:pl-0">
               Work. Experience. Discover.
             </p>
             
-            <p className="text-xs sm:text-base text-white leading-relaxed mb-3 sm:mb-4 max-w-md mx-auto md:mx-0 text-center md:text-left">
+            <p className="text-xs sm:text-base text-white leading-relaxed mb-3 sm:mb-4 max-w-md mx-auto md:mx-0 text-center md:text-left pl-8 sm:pl-10 md:pl-0">
               Empowering students through international exchange programs and professional development opportunities.
             </p>
             

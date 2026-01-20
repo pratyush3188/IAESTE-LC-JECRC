@@ -20,6 +20,46 @@ export default function Home() {
       backgroundImage: homeImage,
       fallbackGradient: "linear-gradient(135deg, #003F68 0%, #005a8f 100%)",
     },
+    {
+      id: 2,
+      title: "Welcome to IAESTE LC JECRC",
+      subtitle: "Work. Experience. Discover.",
+      description: "Empowering students through international exchange programs and professional development opportunities worldwide.",
+      buttonText: "Apply Now",
+      buttonLink: "/apply",
+      backgroundImage: homeImage,
+      fallbackGradient: "linear-gradient(135deg, #003F68 0%, #005a8f 100%)",
+    },
+    {
+      id: 3,
+      title: "Welcome to IAESTE LC JECRC",
+      subtitle: "Work. Experience. Discover.",
+      description: "Empowering students through international exchange programs and professional development opportunities worldwide.",
+      buttonText: "Apply Now",
+      buttonLink: "/apply",
+      backgroundImage: homeImage,
+      fallbackGradient: "linear-gradient(135deg, #003F68 0%, #005a8f 100%)",
+    },
+    {
+      id: 4,
+      title: "Welcome to IAESTE LC JECRC",
+      subtitle: "Work. Experience. Discover.",
+      description: "Empowering students through international exchange programs and professional development opportunities worldwide.",
+      buttonText: "Apply Now",
+      buttonLink: "/apply",
+      backgroundImage: homeImage,
+      fallbackGradient: "linear-gradient(135deg, #003F68 0%, #005a8f 100%)",
+    },
+    {
+      id: 5,
+      title: "Welcome to IAESTE LC JECRC",
+      subtitle: "Work. Experience. Discover.",
+      description: "Empowering students through international exchange programs and professional development opportunities worldwide.",
+      buttonText: "Apply Now",
+      buttonLink: "/apply",
+      backgroundImage: homeImage,
+      fallbackGradient: "linear-gradient(135deg, #003F68 0%, #005a8f 100%)",
+    },
   ];
 
   // Benefits data
@@ -97,7 +137,7 @@ export default function Home() {
       <Carousel slides={slides} />
       
       {/* Who we are & Why IAESTE Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 md:pt-8 lg:pt-10 xl:pt-12 pb-4 sm:pb-6 lg:pb-8 -mt-16 md:mt-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           {/* Who we are Section - Left */}
           <div className="space-y-8">

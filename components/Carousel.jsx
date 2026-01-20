@@ -48,7 +48,7 @@ export default function Carousel({ slides = [] }) {
             {/* Image Display - Full Width */}
             {slide.backgroundImage && (
               <div
-                className="relative w-full h-full flex items-center justify-center"
+                className="relative w-full h-full flex items-start justify-center"
                 style={{ willChange: 'opacity', transform: 'translateZ(0)' }}
               >
                 <img 
@@ -58,7 +58,8 @@ export default function Carousel({ slides = [] }) {
                   style={{
                     boxShadow: '0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 15px 30px -10px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.2)',
                     willChange: 'opacity',
-                    transform: 'translateZ(0)'
+                    transform: 'translateZ(0)',
+                    objectPosition: 'top center'
                   }}
                   loading={index === 0 ? "eager" : "lazy"}
                   decoding="async"
@@ -101,8 +102,8 @@ export default function Carousel({ slides = [] }) {
             </svg>
           </button>
 
-          {/* Dots Indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex space-x-3">
+          {/* Dots Indicator - hidden on mobile */}
+          <div className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 z-30 space-x-3">
             {slides.map((_, index) => (
               <button
                 key={index}
@@ -119,8 +120,8 @@ export default function Carousel({ slides = [] }) {
         </>
       )}
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 animate-bounce">
+      {/* Scroll Indicator - hidden on mobile */}
+      <div className="hidden md:block absolute bottom-4 left-1/2 -translate-x-1/2 z-30 animate-bounce">
         <svg className="w-6 h-6 text-white/70 drop-shadow-lg" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
