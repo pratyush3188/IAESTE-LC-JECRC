@@ -156,7 +156,7 @@ export default function Navbar() {
       {isOpen && (
         <>
           <div className="absolute top-full left-0 w-full h-2"></div>
-          <div 
+          <div
             className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-2 animate-fade-in-down overflow-hidden z-50"
             onMouseEnter={() => handleDropdownEnter(setIsOpen, timeoutRef)}
             onMouseLeave={() => handleDropdownLeave(setIsOpen, timeoutRef)}
@@ -348,7 +348,7 @@ export default function Navbar() {
               isOpen={departmentDropdown}
               setIsOpen={setDepartmentDropdown}
               timeoutRef={departmentTimeoutRef}
-              buttonLabel="Department"
+              buttonLabel="Departments"
             >
               <DropdownLink to="/department">Departments</DropdownLink>
               <DropdownLink to="/team">Team</DropdownLink>
@@ -365,8 +365,14 @@ export default function Navbar() {
             </DesktopDropdown>
           </div>
 
-          {/* Join Membership Button (Desktop) */}
-          <div className="hidden md:flex items-center ml-6 -mr-8 lg:-mr-12">
+          {/* Login and Join Membership Buttons (Desktop) */}
+          <div className="hidden md:flex items-center gap-3 ml-6 -mr-8 lg:-mr-12">
+            <Link
+              to="/login"
+              className="relative border-2 border-[#003F68] text-[#003F68] bg-transparent px-6 py-2.5 rounded-md hover:bg-[#003F68]/5 transition-all duration-300 shadow-md hover:shadow-xl font-semibold text-base tracking-wide transform hover:-translate-y-1 hover:scale-105 overflow-hidden group"
+            >
+              <span className="relative z-10">Login</span>
+            </Link>
             <Link
               to="/membership"
               className="relative bg-[#003F68] text-white px-6 py-2.5 rounded-md hover:bg-[#003F68] transition-all duration-300 shadow-md hover:shadow-xl font-semibold text-base tracking-wide transform hover:-translate-y-1 hover:scale-105 overflow-hidden group"
@@ -437,7 +443,7 @@ export default function Navbar() {
             <MobileDropdown
               isOpen={departmentMobileDropdown}
               setIsOpen={setDepartmentMobileDropdown}
-              label="Department"
+              label="Departments"
               icon={<BuildingIcon />}
             >
               <MobileDropdownLink to="/department" onClick={closeMobileMenu}>Departments</MobileDropdownLink>
@@ -455,12 +461,19 @@ export default function Navbar() {
             </MobileDropdown>
           </div>
 
-          {/* Join Membership Button - Fixed at Bottom */}
-          <div className="p-5 pt-3 border-t border-gray-200/80 bg-gradient-to-b from-white via-gray-50/50 to-white backdrop-blur-sm">
+          {/* Login and Join Membership Buttons - Fixed at Bottom */}
+          <div className="p-5 pt-3 border-t border-gray-200/80 bg-gradient-to-b from-white via-gray-50/50 to-white backdrop-blur-sm flex gap-3">
+            <Link
+              to="/login"
+              onClick={closeMobileMenu}
+              className="group relative flex-1 text-center border-2 border-[#003F68] text-[#003F68] bg-transparent px-4 py-4 rounded-xl font-bold text-base hover:bg-[#003F68]/5 active:scale-[0.98] transition-all duration-300 shadow-lg overflow-hidden"
+            >
+              <span className="relative z-10">Login</span>
+            </Link>
             <Link
               to="/membership"
               onClick={closeMobileMenu}
-              className="group relative block w-full text-center bg-[#003F68] text-white px-6 py-4 rounded-xl font-bold text-base hover:bg-[#003F68] active:scale-[0.98] transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden"
+              className="group relative flex-1 text-center bg-[#003F68] text-white px-4 py-4 rounded-xl font-bold text-base hover:bg-[#003F68] active:scale-[0.98] transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden"
             >
               <span className="relative z-10 flex items-center justify-center">
                 <CheckIcon />
