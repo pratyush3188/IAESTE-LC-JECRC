@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import EmployerHireSection from '../components/EmployerHireSection';
 
 export default function Employers() {
-  const [activeTab, setActiveTab] = useState('incoming'); // 'incoming' or 'outgoing'
+  const [activeTab, setActiveTab] = useState('incoming');
 
   const incomingTestimonials = [
     {
@@ -53,171 +53,156 @@ export default function Employers() {
     }
   ];
 
-  const testimonials = activeTab === 'incoming' ? incomingTestimonials : outgoingTestimonials;
-
   return (
-    <div className="bg-white min-h-screen font-sans">
-      {/* 1️⃣ Hero / Header Section */}
-      <section className="bg-[#002B45] text-white py-6 md:py-8 px-6 overflow-hidden relative">
+    <div className="bg-white min-h-screen font-sans selection:bg-[#0B3D59] selection:text-white">
+      {/* 🚀 Premium Hero Section */}
+      <section className="relative pt-20 pb-8 md:pt-32 md:pb-12 overflow-hidden bg-[#002B45]">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(11,61,89,0.2),transparent)] pointer-events-none" />
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '40px 40px' }} />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] border border-white/5 rounded-full pointer-events-none"
+        />
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-[10 00px] mx-auto px-6 relative z-10">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col items-start"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-center"
           >
-            <span className="bg-[#3B82F6] text-white text-[10px] md:text-xs font-bold px-2 py-1 rounded-sm uppercase tracking-[0.2em] mb-2 shadow-sm">
-              Employers
-            </span>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-1 tracking-tight leading-none">
-              How to hire an IAESTE intern
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-blue-500 text-white text-[10px] md:text-xs font-black px-4 py-2 rounded-full uppercase tracking-[0.4em] mb-8 inline-block shadow-2xl shadow-blue-500/20"
+            >
+              Enterprise Solutions
+            </motion.span>
+
+            <h1 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-[0.9] mb-6">
+              Hire Global <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">Talent</span>
             </h1>
-            <p className="text-base md:text-lg text-gray-300 font-light max-w-2xl leading-relaxed">
-              Access to the best young talent from around the world
+
+            <p className="max-w-3xl mx-auto text-blue-100/60 text-sm md:text-xl font-bold uppercase tracking-[0.2em] leading-relaxed">
+              Scale your organization with the best young minds from over 100+ countries.
             </p>
           </motion.div>
         </div>
 
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/10 to-transparent pointer-events-none"></div>
+
       </section>
 
+      {/* 🛠️ Dynamic Process Section */}
       <EmployerHireSection />
 
-      {/* 2.5️⃣ Voices from Our Global Employer Network Section */}
-      <section className="bg-gray-50 py-16 px-6 relative overflow-hidden">
-        {/* Decorative Background Elements */}
-        <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-blue-50 rounded-full blur-3xl opacity-60"></div>
-        <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 bg-indigo-50 rounded-full blur-3xl opacity-60"></div>
+      {/* ⭐ Global Testimonials Section */}
+      <section className="bg-[#F8FAFC] py-32 px-6 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_0%_0%,rgba(11,61,89,0.03),transparent)] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-24"
           >
-            <h2 className="text-3xl md:text-5xl font-extrabold text-[#003F68] tracking-tight mb-4">
-              Voices from Our Global Employer Network
+            <h2 className="text-3xl md:text-5xl font-black text-[#003F68] uppercase tracking-tighter mb-4">
+              Legacy of <span className="text-blue-500">Success</span>
             </h2>
-            <div className="w-24 h-1.5 bg-[#3B82F6] mx-auto rounded-full shadow-sm"></div>
+            <div className="w-32 h-2 bg-[#003F68] mx-auto rounded-full" />
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-            {outgoingTestimonials.map((testimonial, index) => (
-              <motion.div
-                key={testimonial.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="group bg-white p-8 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100 hover:border-blue-100 transition-all duration-500 flex flex-col h-full relative"
+          {/* Testimonial Tabs */}
+          <div className="flex justify-center gap-4 mb-16">
+            {['incoming', 'outgoing'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-10 py-4 rounded-full font-black text-[10px] uppercase tracking-widest transition-all duration-300 ${activeTab === tab
+                  ? "bg-[#003F68] text-white shadow-2xl shadow-[#003F68]/30 scale-105"
+                  : "bg-white text-[#003F68]/40 border border-[#003F68]/10 hover:bg-[#003F68]/5"
+                  }`}
               >
-                {/* Quote Icon Overlay */}
-                <div className="absolute top-6 right-8 text-7xl text-blue-500/5 font-serif select-none pointer-events-none group-hover:text-blue-500/10 transition-colors">
-                  "
-                </div>
+                {tab === 'incoming' ? 'Incoming Talents' : 'Outgoing Ambassadors'}
+              </button>
+            ))}
+          </div>
 
-                <div className="flex items-center mb-8 relative">
-                  <div className="relative">
-                    <div className="w-20 h-20 rounded-2xl overflow-hidden border-4 border-white shadow-lg transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-12"
+            >
+              {(activeTab === 'incoming' ? incomingTestimonials : outgoingTestimonials).map((testimonial, index) => (
+                <motion.div
+                  key={testimonial.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -15 }}
+                  className="bg-white p-12 rounded-[3.5rem] shadow-2xl shadow-[#003F68]/5 border border-gray-50 flex flex-col h-full group"
+                >
+                  <div className="mb-10 relative">
+                    <div className="w-24 h-24 rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl transform -rotate-6 group-hover:rotate-0 transition-all duration-700">
                       <img
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover scale-110"
                       />
                     </div>
-                    {/* Floating Accent */}
-                    <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-[#3B82F6] rounded-lg shadow-md flex items-center justify-center">
-                      <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-blue-500 rounded-2xl shadow-xl flex items-center justify-center text-white">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M10.394 2.813a1 1 0 00-.454-.394 1 1 0 00-.454.394l-5.384 9.14a1 1 0 001.373 1.341l.983-.41V16a1 1 0 001 1h4a1 1 0 001-1v-3.111l.983.41a1 1 0 001.373-1.341l-5.384-9.14z" />
                       </svg>
                     </div>
                   </div>
-                  <div className="ml-6">
-                    <h3 className="text-xl font-bold text-[#003F68] group-hover:text-[#3B82F6] transition-colors">{testimonial.name}</h3>
-                    <div className="flex items-center text-blue-500 text-sm font-semibold uppercase tracking-wider">
-                      <span className="w-4 h-[2px] bg-blue-500 mr-2"></span>
-                      {testimonial.location}
-                    </div>
-                  </div>
-                </div>
 
-                <div className="relative flex-1">
-                  <p className="text-gray-600 italic leading-relaxed text-base lg:text-lg mb-6">
+                  <p className="text-gray-500 font-bold text-lg leading-relaxed italic mb-8 flex-1">
                     "{testimonial.testimonial}"
                   </p>
-                </div>
 
-                {/* Rating Display */}
-                <div className="mt-4 pt-6 border-t border-gray-50 flex items-center justify-between">
-                  <div className="flex items-center space-x-1">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
+                  <div className="pt-8 border-t border-gray-50">
+                    <h3 className="text-xl font-black text-[#003F68] uppercase tracking-tight">{testimonial.name}</h3>
+                    <p className="text-blue-500 font-black text-[10px] uppercase tracking-[0.2em] mt-1">{testimonial.location}</p>
                   </div>
-                  <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Verified Intern</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 
-      <section className="bg-white py-12 px-6 border-t border-gray-100">
+      {/* 💎 Why IAESTE - Feature Grid */}
+      <section className="bg-white py-32 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#003F68] tracking-tight">
-              Why Employers Trust IAESTE
-            </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+            {[
+              { val: "100+", label: "Countries Connected", desc: "Access students from a truly global talent pool." },
+              { val: "0₹", label: "No Agency Fees", desc: "Cost-effective international hiring with zero middleman." },
+              { val: "PRE", label: "Evaluated Talent", desc: "Only verified and nominated candidates from top unis." },
+              { val: "END", label: "End-to-End Support", desc: "From visa guidance to onboarding and stipends." }
+            ].map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="p-10 rounded-[3rem] bg-white border-2 border-gray-50 hover:border-blue-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group"
+              >
+                <div className="text-6xl font-black text-[#003F68]/5 group-hover:text-blue-500/10 transition-colors mb-4">{feature.val}</div>
+                <h3 className="text-xl font-black text-[#003F68] uppercase tracking-tight mb-3">{feature.label}</h3>
+                <p className="text-gray-400 font-bold leading-relaxed">{feature.desc}</p>
+              </motion.div>
+            ))}
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-            {/* Item 1 */}
-            <div className="relative pl-8 border-l-4 border-[#3B82F6] group">
-              <div className="text-5xl font-bold text-gray-200/60 mb-4 select-none group-hover:text-[#3B82F6]/20 transition-colors">100+</div>
-              <h3 className="text-lg font-bold text-[#003F68] mb-2 uppercase tracking-tight">Countries Connected</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Access students from a truly global talent pool.
-              </p>
-            </div>
-
-            {/* Item 2 */}
-            <div className="relative pl-8 border-l-4 border-[#3B82F6] group">
-              <div className="text-5xl font-bold text-gray-200/60 mb-4 select-none group-hover:text-[#3B82F6]/20 transition-colors">0₹</div>
-              <h3 className="text-lg font-bold text-[#003F68] mb-2 uppercase tracking-tight">No Agency Fees</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Cost-effective international hiring.
-              </p>
-            </div>
-
-            {/* Item 3 */}
-            <div className="relative pl-8 border-l-4 border-[#3B82F6] group">
-              <div className="text-5xl font-bold text-gray-200/60 mb-4 select-none group-hover:text-[#3B82F6]/20 transition-colors">
-                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-bold text-[#003F68] mb-2 uppercase tracking-tight">Pre-Evaluated Talent</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                Only verified and nominated candidates.
-              </p>
-            </div>
-
-            {/* Item 4 */}
-            <div className="relative pl-8 border-l-4 border-[#3B82F6] group">
-              <div className="text-5xl font-bold text-gray-200/60 mb-4 select-none group-hover:text-[#3B82F6]/20 transition-colors">∞</div>
-              <h3 className="text-lg font-bold text-[#003F68] mb-2 uppercase tracking-tight">End-to-End Support</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                From form submission to intern arrival.
-              </p>
-            </div>
-          </div>
-
-
         </div>
       </section>
     </div>
