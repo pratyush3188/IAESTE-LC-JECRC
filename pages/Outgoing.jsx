@@ -158,36 +158,40 @@ export default function Outgoing() {
   ];
 
   const data = [
-    { year: "2013-14", countries: ["Vernsania"], students: 2 },
-    { year: "2014-15", countries: ["Iran", "Lebanon", "Oman"], students: 9 },
+    { year: "2013-14", countries: ["Czech Republic","Bosnia"], students: 2 },
+    {
+      year: "2014-15",  
+      countries: ["Iran", "Croatia", "Poland", "Lebanon", "Germany", "Germany", "Oman", "Germany", "Germany"],
+      students: 9
+    },
     { year: "2015-16", countries: ["Germany", "Iran"], students: 2 },
     {
       year: "2016-17",
-      countries: ["Germany", "Nepal", "Kenya", "Poland", "Belgium"],
+      countries: ["Germany", "Germany", "Nepal", "Nepal", "Poland", "Belgium", "Vietnam", "Vietnam", "Vietnam", "Germany", "Germany", "Kenya", "Kenya", "Czech Republic", "Vietnam"],
       students: 15
     },
     {
       year: "2017-18",
-      countries: ["Poland", "Vietnam", "Kazakistan", "Turkey", "Portugal"],
+      countries: ["Poland", "Vietnam", "Vietnam", "Vietnam", "Vietnam", "Poland", "Kazakhstan", "Vietnam", "Iran", "Turkey", "Belarus", "Macedonia", "Iran", "Portugal", "Turkey", "Vietnam", "Vietnam"],
       students: 17
     },
     {
       year: "2018-19",
-      countries: ["Nepal", "Germany", "Brazil", "Poland", "Turkey"],
+      countries: ["Nepal", "Germany", "Thailand", "Thailand", "Belarus", "Thailand", "Brazil", "Germany", "Poland", "Germany", "Turkey", "Poland"],
       students: 12
     },
-    { year: "2019-20", countries: ["Turkey", "Remote"], students: 1 },
-    { year: "2020-21", countries: ["Bangladesh", "Remote"], students: 2 },
-    { year: "2021-22", countries: ["Saudi Arabia", "Remote"], students: 6 },
-    { year: "2022-23", countries: ["2 Remote", "2 Conventional"], students: 4 },
+    { year: "2019-20", countries: ["Turkey(Remote)"], students: 1 },
+    { year: "2020-21", countries: ["Bangladesh(Remote)", "Yemen(Remote)"], students: 2 },
+    { year: "2021-22", countries: ["Saudi Arabia(Remote)", "Saudi Arabia(Remote)", "Turkey(Remote)", "Turkey(Remote)", "Turkey(Remote)", "Bangladesh(Remote)"], students: 6 },
+    { year: "2022-23", countries: ["Czech Republic", "Iran(Remote)", "Tanzania(Remote)", "Hong Kong"], students: 4 },
     {
       year: "2023-24",
-      countries: ["UAE", "Tanzania", "Iran", "Kenia", "Canada", "Oman"],
+      countries: ["United Arab Emirates", "Tanzania(Remote)", "Tanzania(Remote)", "Iran(Remote)", "Kenya(Remote)", "Canada", "Oman", "Tanzania(Remote)"],
       students: 8
     },
     {
       year: "2024-25",
-      countries: ["Vietnam", "Iran", "Brazil", "Oman", "Tazakisthan", "Ghana"],
+      countries: ["Vietnam(Remote)", "Colombia(Remote)", "Iran(Remote)", "Palestine(Remote)", "Iran(Remote)", "Tanzania(Remote)", "Tanzania(Remote)", "Brazil", "Tajikistan(Remote)", "Oman", "Ghana(Remote)", "Burundi(Remote)", "Panama(Remote)"],
       students: 13
     }
   ];
@@ -412,8 +416,8 @@ export default function Outgoing() {
                   key={index}
                   onClick={() => toggleMobileCard(index)}
                   className={`group relative bg-[#EAF4FF] rounded-2xl shadow-sm border border-transparent p-5 overflow-hidden transition-all duration-300 ease-out cursor-pointer min-h-[120px] ${
-                    open ? "max-h-[320px]" : "max-h-[150px] md:max-h-[150px]"
-                  } md:group-hover:max-h-[280px]`}
+                    open ? "max-h-[1200px]" : "max-h-[150px] md:max-h-[150px] md:group-hover:max-h-[1200px]"
+                  }`}
                   aria-expanded={open}
                 >
                   <div className="absolute top-3 right-4 z-20">
@@ -425,8 +429,8 @@ export default function Outgoing() {
                   <p className="text-lg font-semibold text-[#003F68]">{item.year}</p>
                   <div
                     className={`flex flex-wrap gap-2 mt-3 transition-all duration-180 ease-out overflow-hidden ${
-                      open ? "opacity-100 max-h-40" : "opacity-0 max-h-0"
-                    } md:group-hover:opacity-100 md:group-hover:max-h-40`}
+                      open ? "opacity-100 max-h-[1000px]" : "opacity-0 max-h-0"
+                    } md:group-hover:opacity-100 md:group-hover:max-h-[1000px]`}
                   >
                     {item.countries.length > 0 ? (
                       item.countries.map((c, idx) => (

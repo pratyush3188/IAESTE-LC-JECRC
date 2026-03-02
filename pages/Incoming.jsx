@@ -106,12 +106,16 @@ export default function Incoming() {
       year: "2014-15",
       countries: [
         "Germany",
+        "Germany",
         "Argentina",
+        "Germany",
         "Tunisia",
         "Turkey",
         "Croatia",
         "Oman",
-        "Thailand"
+        "Thailand",
+        "Thailand",
+        "Germany"
       ],
       students: 11
     },
@@ -122,9 +126,10 @@ export default function Incoming() {
         "Croatia",
         "Belarus",
         "Norway",
+        "USA",
         "Hungary",
-        "Germany",
-      
+        "Croatia",
+        "Germany"
       ],
       students: 8
     },
@@ -133,16 +138,28 @@ export default function Incoming() {
       countries: [
         "UK",
         "Spain",
+        "UK",
+        "Tunisia",
+        "Indonesia",
+        "Indonesia",
+        "Indonesia",
         "Indonesia",
         "Greece",
         "Kenya",
-        "Slovak Republic",
+        "UK",
+        "Czech Republic",
         "Vietnam",
+        "Vietnam",
+        "Spain",
+        "Vietnam",
+        "Vietnam",
+        "Kenya",
         "Saudi Arabia",
         "Poland",
         "Belgium",
         "Thailand",
-        "Colombia"
+        "Slovak Republic",
+        "Columbia"
       ],
       students: 24
     },
@@ -150,21 +167,33 @@ export default function Incoming() {
       year: "2017-18",
       countries: [
         "Germany",
+        "Germany",
         "Tunisia",
         "Nepal",
+        "Tunisia",
         "Norway",
         "Oman",
         "Indonesia",
         "Nigeria",
+        "Germany",
+        "Poland",
         "Poland",
         "Turkey",
         "Slovakia",
         "Belarus",
+        "Poland",
+        "Turkey",
         "Austria",
         "Belgium",
         "Vietnam",
+        "Vietnam",
+        "Vietnam",
+        "Vietnam",
         "Ireland",
-        "Hungary"
+        "Hungary",
+        "Austria",
+        "Belgium",
+        "Vietnam"
       ],
       students: 28
     },
@@ -175,15 +204,23 @@ export default function Incoming() {
         "Argentina",
         "Brazil",
         "Czech Republic",
-        "Iran",
         "Poland",
+        "Iran",
         "Tunisia",
         "Thailand",
+        "Tunisia",
         "Colombia",
+        "Brazil",
         "Germany",
-        "UK",
-        "Serbia",
-        "Turkey"
+        "Brazil",
+        "Germany",
+        "Germany",
+        "United Kingdom",
+        "Syria",
+        "Syria",
+        "Turkey",
+        "Syria",
+        "Syria"
       ],
       students: 21
     },
@@ -199,24 +236,26 @@ export default function Incoming() {
     },
     {
       year: "2021-22",
-      countries: ["Vietnam", "Ghana"],
+      countries: ["Vietnam", "Ghana(Remote)"],
       students: 2
     },
     {
       year: "2022-23",
-      countries: ["Iran"], 
+      countries: ["Iran"],
       students: 1
     },
     {
       year: "2023-24",
       countries: [
         "Tunisia",
-        "Uganda",
+        "Tunisia",
+        "Tunisia",
+        "Tunisia",
+        "Ghana",
         "Tanzania",
-        "Greece?",
+        "Iran",
         "Palestine",
-        "Belarus",
-        "Oman"
+        "Belarus"
       ],
       students: 9
     },
@@ -233,7 +272,16 @@ export default function Incoming() {
         "Jordan",
         "Spain",
         "Iran",
-        "Bangladesh"
+        "Palestine",
+        "Spain",
+        "Iran",
+        "Iran",
+        "Austria",
+        "Yemen(Remote)",
+        "Bangladesh(Remote)",
+        "Japan(Remote)",
+        "Canada(Remote)",
+        "Iraq(Remote)"
       ],
       students: 20
     }
@@ -539,7 +587,7 @@ export default function Incoming() {
                 <div
                   key={item.year + idx}
                   className={`group relative bg-[#EAF4FF] rounded-2xl shadow-sm border border-transparent p-5 overflow-hidden transition-all duration-300 ease-out cursor-pointer
-                    min-h-[120px] max-h-[150px] md:max-h-[150px] ${expanded ? "max-h-[300px]" : "group-hover:max-h-[280px]"}`}
+                    min-h-[120px] ${expanded ? "max-h-[1200px]" : "max-h-[150px] md:max-h-[150px] group-hover:max-h-[1200px]"}`}
                   onClick={() => toggleExpand(idx)}
                 >
                   <div className="absolute top-3 right-4 z-20">
@@ -553,7 +601,7 @@ export default function Incoming() {
 
                   <div
                     className={`flex flex-wrap gap-2 mt-3 transition-all duration-150 ease-out overflow-hidden
-                      ${expanded ? "opacity-100 max-h-40" : "opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-40"}`}
+                      ${expanded ? "opacity-100 max-h-[1000px]" : "opacity-0 max-h-0 group-hover:opacity-100 group-hover:max-h-[1000px]"}`}
                   >
                     {item.countries.length > 0 ? (
                       item.countries.map((c, i) => (
