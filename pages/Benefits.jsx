@@ -167,17 +167,17 @@ export default function Benefits() {
   ];
 
   const beforePoints = [
-    "Limited exposure",
-    "Hesitation in communication",
-    "Uncertainty about professional environments",
-    "Lack of confidence in handling real-world challenges"
+    "Limited practical exposure beyond classroom learning.",
+    "Lack of confidence in professional communication.",
+    "Uncertainty about career direction.",
+    "Minimal global awareness and industry experience."
   ];
 
   const afterPoints = [
-    "Confidence in communication",
-    "Global awareness",
-    "Ability to manage people and responsibilities",
-    "Clarity about personal and professional goals"
+    "Confident communication and international networking skills.",
+    "Broader global perspective and cultural understanding.",
+    "Hands-on technical and professional experience.",
+    "Clear career direction with real-world industry exposure."
   ];
 
   return (
@@ -539,6 +539,29 @@ export default function Benefits() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How IAESTE Prepares You for the Global Stage */}
+      <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-16 md:py-24 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#003F68] mb-6 text-left md:text-center">
+            How IAESTE Prepares You for the Global Stage
+          </h2>
+          <p className="text-lg text-gray-700 mb-8 text-left md:text-center">
+            IAESTE helps you grow from a classroom learner into a globally ready professional.
+          </p>
+          <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6 md:p-10">
+            <ul className="space-y-4 md:space-y-5 text-base md:text-lg text-gray-700 leading-relaxed">
+              <li>• Builds practical skills that go beyond classroom learning.</li>
+              <li>• Offers international exposure and real professional experience.</li>
+              <li>• Develops strong communication and teamwork abilities.</li>
+              <li>• Encourages leadership through hands-on responsibilities.</li>
+              <li>• Enhances cultural awareness and a global mindset.</li>
+              <li>• Bridges the gap between academics and the workplace.</li>
+              <li>• Prepares students to adapt, grow, and succeed in a global environment.</li>
+            </ul>
           </div>
         </div>
       </section>

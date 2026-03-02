@@ -1,5 +1,26 @@
 import React, { useState } from 'react';
 
+import {
+  Groups2,
+  Analytics,
+  FlightLand,
+  FlightTakeoff,
+  AdminPanelSettings,
+  Campaign,
+  Handshake,
+  BusinessCenter
+} from '@mui/icons-material';
+
+const iconMap = {
+  hr: <Groups2 sx={{ fontSize: 40, color: '#003F68' }} />,
+  it: <Analytics sx={{ fontSize: 40, color: '#003F68' }} />,
+  incoming: <FlightLand sx={{ fontSize: 40, color: '#003F68' }} />,
+  outgoing: <FlightTakeoff sx={{ fontSize: 40, color: '#003F68' }} />,
+  Admin: <AdminPanelSettings sx={{ fontSize: 40, color: '#003F68' }} />,
+  'public-relations': <Campaign sx={{ fontSize: 40, color: '#003F68' }} />,
+  cra: <Handshake sx={{ fontSize: 40, color: '#003F68' }} />
+};
+
 export default function DepartmentCard({ department }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -21,8 +42,7 @@ export default function DepartmentCard({ department }) {
         </div>
 
         <div className="w-20 h-16 bg-gray-100 rounded-md flex items-center justify-center flex-shrink-0">
-          {/* placeholder image/icon box */}
-          <div className="w-12 h-10 bg-gray-200 rounded-sm" aria-hidden="true" />
+          {iconMap[department.id] || <BusinessCenter sx={{ fontSize: 40, color: '#003F68' }} />}
         </div>
       </div>
 
