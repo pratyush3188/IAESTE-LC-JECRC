@@ -110,15 +110,8 @@ const Contact = () => {
         {
             icon: <PhoneIcon />,
             title: "Phone",
-            content: "Devansh Gupta",
-            subContent: "(+91) 6376044011",
-            color: "#0B3D59"
-        },
-        {
-            icon: <PhoneIcon />,
-            title: "Phone",
-            content: "Rakshita Rathore",
-            subContent: "(+91) 7690000331",
+            content: "Devansh Gupta | Rakshita Rathore",
+            subContent: "(+91) 6376044011 | (+91) 7690000331",
             color: "#0B3D59"
         },
         {
