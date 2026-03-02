@@ -1,98 +1,147 @@
 // src/pages/Gallery.jsx
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import CloseIcon from "@mui/icons-material/Close"; // You might need to install/import this or use text
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
-// Import images from assets (Corrected paths)
-import dinnerImg from "../src/assets/images/Dinner.jpg";
-import memberDriveImg from "../src/assets/images/imgv1.jpeg";
-import workshopImg from "../src/assets/images/home.jpg";
-import agraImg from "../src/assets/images/Agra.jpg";
-import img1 from "../src/assets/images/1.jpeg";
-import img2 from "../src/assets/images/imgv2.jpg";
-import img3 from "../src/assets/images/imgv3.jpg";
-import img4 from "../src/assets/images/imgv4.jpg";
-import img5 from "../src/assets/images/imgv5.jpg";
-import img6 from "../src/assets/images/imgv6.jpg";
-import img7 from "../src/assets/images/imgv7.jpg";
-import img8 from "../src/assets/images/imgv8.jpg";
-import img9 from "../src/assets/images/imgv9.jpg";
-import img10 from "../src/assets/images/imgv10.jpg";
-import img12 from "../src/assets/images/imgv12.jpg";
-import img14 from "../src/assets/images/imgv14.jpg";
-import img15 from "../src/assets/images/imgv15.jpg";
+/**
+ * Dynamic scan for images from the assets folder.
+ * Vite's import.meta.glob allows us to find all images without manual imports.
+ */
+const imageModules = import.meta.glob("../src/assets/images/**/*.{jpg,jpeg,png,JPG,JPEG,PNG,webp,svg}", { eager: true });
 
-// --- Components ---
+// --- Mappings for better display names and drive links ---
+const NAME_MAP = {
+    'Membership_Drive': 'Member Drive',
+    'Rythm_2026': 'Rythm 2026',
+    'Womens_Day': "Women's Day",
+    'IAESTE X Zarurat': 'IAESTE X Zarurat',
+    'Faliciatation Ceremony': 'Felicitation Ceremony',
+    'Trips': 'Trips & Fun',
+    'Dinner': 'Events & Culture',
+    'Induction': 'Member Induction',
+    'Aarunaya': 'Aarunaya \'24',
+    'Rythm 2025': 'Rythm 2025',
+    'Rakhi': 'Rakhi Celebration',
+    'Orientation': 'Orientation',
+    'Admin Session': 'Admin Session',
+    'Team': 'IAESTE Team'
+};
 
-const CategoryStrip = ({ category, onSelect, isActive, isAnyActive }) => {
+const DRIVE_LINKS = {
+    'Rythm_2026': 'https://drive.google.com/drive/folders/1RYTHM2026_PLACEHOLDER',
+    'Membership_Drive': 'https://drive.google.com/drive/folders/MEMBER_DRIVE_PLACEHOLDER',
+    'Dinner': 'https://drive.google.com/drive/folders/EVENTS_CULTURE_PLACEHOLDER',
+};
+
+// --- Sub-components ---
+
+const CategoryCard = ({ category, onSelect }) => {
+    // Dynamic font size based on name length to prevent overflow
+    const fontSizeClass = category.name.length > 20
+        ? "text-lg md:text-xl"
+        : category.name.length > 15
+            ? "text-xl md:text-2xl"
+            : "text-2xl md:text-4xl";
+
     return (
         <motion.div
-            layout
             onClick={() => onSelect(category)}
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] }}
-            className={`relative h-[40vh] md:h-[70vh] cursor-pointer overflow-hidden rounded-2xl transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${isActive ? "flex-[10]" : "flex-[1] -translate-y-0"
-                } ${!isActive && isAnyActive ? "opacity-50 grayscale" : "opacity-100 grayscale-0"}`}
-            style={{
-                background: `url(${category.image}) center/cover no-repeat`,
-                minWidth: "60px"
-            }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+            className="group relative min-h-[350px] md:h-[65vh] cursor-pointer overflow-hidden rounded-[2.5rem] shadow-xl transition-all duration-300"
+            style={{ contentVisibility: 'auto' }}
         >
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500 hover:bg-black/40" />
+            <div
+                className="absolute inset-0 transform transition-transform duration-700 group-hover:scale-105"
+                style={{
+                    background: `url(${category.image}) center/cover no-repeat`,
+                }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent transition-opacity duration-300 group-hover:bg-black/50" />
 
-            <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 flex flex-col justify-end items-start text-white">
-                <motion.h2
-                    layout="position"
-                    className={`font-black text-2xl md:text-4xl uppercase tracking-tighter transition-transform duration-500Origin-left ${!isActive ? "md:-rotate-90 md:origin-bottom-left md:translate-x-8 md:-translate-y-8" : "rotate-0"
-                        } whitespace-nowrap`}
+            {category.isNew && (
+                <div className="absolute top-6 right-6 z-20">
+                    <span className="bg-[#0B3D59] text-white text-[10px] font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl ring-4 ring-white/20">
+                        New
+                    </span>
+                </div>
+            )}
+
+            <div className="absolute bottom-0 left-0 w-full p-6 md:p-10 flex flex-col justify-end items-start text-white z-10">
+                <h2
+                    className={`font-black uppercase tracking-tighter transition-all duration-500 leading-none drop-shadow-2xl md:-rotate-90 md:origin-bottom-left md:translate-x-10 md:-translate-y-10 group-hover:rotate-0 group-hover:translate-x-0 group-hover:translate-y-0 whitespace-nowrap overflow-hidden text-ellipsis max-w-[280px] md:max-w-[450px] ${fontSizeClass}`}
                 >
                     {category.name}
-                </motion.h2>
+                </h2>
 
-                {isActive && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="mt-2 text-sm md:text-base text-gray-200 max-w-md"
-                    >
-                        Click to view all {category.items.length} photos
-                    </motion.div>
-                )}
+                <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 mt-3 translate-y-2 group-hover:translate-y-0">
+                    <p className="text-white/80 font-black text-[10px] md:text-xs uppercase tracking-[0.2em] flex items-center gap-2">
+                        <span className="w-6 h-0.5 bg-white/50 rounded-full" />
+                        {category.items.length} Photos
+                    </p>
+                </div>
             </div>
         </motion.div>
     );
 };
 
-const MasonryGrid = ({ items }) => {
+const MasonryGrid = ({ items, driveLink }) => {
+    const [displayLimit, setDisplayLimit] = useState(12);
+
     return (
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 p-4 pb-20">
-            {items.map((item, index) => (
-                <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true, margin: "100px" }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
-                    className="break-inside-avoid rounded-xl overflow-hidden shadow-lg group relative bg-gray-100"
-                >
-                    <img
-                        src={item.image}
-                        alt={item.title}
-                        width="300"
-                        height="300"
-                        loading="lazy"
-                        decoding="async"
-                        className="w-[300px] h-[300px] object-cover transform transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <p className="text-white font-bold text-lg">{item.title}</p>
+        <div className="pb-32">
+            <div className="columns-2 sm:columns-3 md:columns-4 lg:columns-5 gap-4 space-y-4 p-4">
+                {items.slice(0, displayLimit).map((item, index) => (
+                    <div
+                        key={index}
+                        className="break-inside-avoid rounded-2xl overflow-hidden shadow-lg group relative bg-gray-100"
+                        style={{ contentVisibility: 'auto' }}
+                    >
+                        <div className="relative overflow-hidden">
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                loading="lazy"
+                                className="w-full h-auto transform transition-transform duration-500 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                                <p className="text-white font-bold text-xs md:text-sm leading-tight">{item.title}</p>
+                            </div>
+                        </div>
                     </div>
-                </motion.div>
-            ))}
+                ))}
+            </div>
+
+            <div className="flex flex-col items-center justify-center mt-12 mb-24 px-4 gap-8">
+                {items.length > displayLimit && (
+                    <button
+                        onClick={() => setDisplayLimit(prev => prev + 12)}
+                        className="px-10 py-4 bg-[#0B3D59]/10 text-[#0B3D59] font-black rounded-2xl hover:bg-[#0B3D59]/20 transition-all tracking-widest text-sm"
+                    >
+                        LOAD MORE PHOTOS
+                    </button>
+                )}
+
+                <div className="max-w-xl w-full text-center p-10 rounded-[3rem] bg-white border border-[#0B3D59]/10 shadow-2xl">
+                    <h3 className="text-3xl font-black mb-4 uppercase tracking-tighter text-[#0B3D59]">
+                        Discover More
+                    </h3>
+                    <p className="text-[#0B3D59]/70 mb-8 font-medium">
+                        We have thousands of memories captured. Explore our full high-resolution archive on Google Drive for {items.length > displayLimit ? "all the remaining" : "more"} photos.
+                    </p>
+                    <a
+                        href={driveLink || "https://drive.google.com/drive/folders/17R9d7oFEXXXXX"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 px-10 py-5 bg-[#0B3D59] text-white rounded-2xl font-black text-lg shadow-xl hover:shadow-[#0B3D59]/40 hover:-translate-y-1 transition-all duration-300"
+                    >
+                        <OpenInNewIcon /> VIEW ARCHIVE ON DRIVE
+                    </a>
+                </div>
+            </div>
         </div>
     );
 };
@@ -102,110 +151,127 @@ const MasonryGrid = ({ items }) => {
 export default function Gallery() {
     const [selectedCategory, setSelectedCategory] = useState(null);
 
-    // Generate large datasets for "50+ photos" simulation using duplicated assets
-    const baseImages = [
-        dinnerImg, memberDriveImg, workshopImg, agraImg,
-        img1, img2, img3, img4, img5, img6, img7,
-        img8, img9, img10, img12, img14, img15
-    ];
+    // Group images dynamicly
+    const categories = useMemo(() => {
+        const data = {};
 
-    const generateItems = (baseTitle, count) => {
-        return Array.from({ length: count }, (_, i) => ({
-            image: baseImages[i % baseImages.length],
-            title: `${baseTitle} ${i + 1}`
-        }));
-    };
+        // Filter out HEIC files which might not render in all browsers
+        const validPathModules = Object.entries(imageModules).filter(([path]) =>
+            !path.toLowerCase().endsWith('.heic')
+        );
 
-    const categories = useMemo(() => [
-        {
-            id: 1,
-            name: "Events & Culture",
-            image: dinnerImg,
-            items: generateItems("Culture", 25)
-        },
-        {
-            id: 2,
-            name: "Member Drive",
-            image: memberDriveImg,
-            items: generateItems("Drive", 20)
-        },
-        {
-            id: 3,
-            name: "Workshops",
-            image: workshopImg,
-            items: generateItems("Workshop", 22)
-        },
-        {
-            id: 4,
-            name: "Trips & Fun",
-            image: agraImg,
-            items: generateItems("Trip", 30)
-        }
-    ], []);
+        validPathModules.forEach(([path, module]) => {
+            const parts = path.split('/');
+            const folder = parts[parts.length - 2];
+            const fileName = parts[parts.length - 1];
+
+            // Ignore root images for the dynamic menu
+            if (folder === 'images') return;
+
+            if (!data[folder]) {
+                data[folder] = {
+                    id: folder,
+                    name: NAME_MAP[folder] || folder.replace(/_/g, ' ').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+                    image: module.default,
+                    items: [],
+                    driveLink: DRIVE_LINKS[folder] || null,
+                    isNew: folder.toLowerCase().includes('2026') || folder.toLowerCase().includes('induction') || folder.toLowerCase().includes('aarunaya')
+                };
+            }
+            data[folder].items.push({
+                image: module.default,
+                title: fileName.replace(/_/g, ' ').replace(/-/g, ' ').split('.')[0]
+            });
+        });
+
+        // Group sorting: New ones first, then alphabetical
+        return Object.values(data).sort((a, b) => {
+            if (a.isNew && !b.isNew) return -1;
+            if (!a.isNew && b.isNew) return 1;
+            return a.name.localeCompare(b.name);
+        });
+    }, []);
 
     return (
         <div className="min-h-screen bg-white text-[#0B3D59] font-sans selection:bg-[#0B3D59] selection:text-white overflow-x-hidden">
-            {/* Header */}
-            <motion.div
-                className="pt-20 pb-8 text-center px-4 relative z-10"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-            >
-                <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-2 bg-clip-text text-transparent bg-gradient-to-r from-[#0B3D59] to-[#0E517A]">
-                    {selectedCategory ? selectedCategory.name : "Our Gallery"}
-                </h1>
-                <p className="text-gray-500 font-medium text-lg">
-                    {selectedCategory ? "Explore the moments" : "Select a category to explore"}
-                </p>
-            </motion.div>
-
-            {/* Content Area */}
-            <div className="max-w-[1600px] mx-auto px-4 min-h-[60vh] relative pb-24">
-                <AnimatePresence mode="wait">
-                    {!selectedCategory ? (
+            <AnimatePresence mode="wait">
+                {!selectedCategory ? (
+                    <motion.div
+                        key="gallery-home"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        {/* Header */}
                         <motion.div
-                            key="menu"
-                            className="flex flex-col md:flex-row gap-4 h-full"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
+                            className="pt-32 pb-12 text-center px-4 relative z-10"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
                         >
-                            {categories.map((cat) => (
-                                <CategoryStrip
-                                    key={cat.id}
-                                    category={cat}
-                                    onSelect={setSelectedCategory}
-                                    isActive={false} // In this view, none are "active" in the detail sense, but we could add a hover state locally if we moved state down
-                                    isAnyActive={false}
-                                />
-                            ))}
+                            <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#0B3D59] to-[#0E517A]">
+                                Our Gallery
+                            </h1>
+                            <p className="text-[#0B3D59]/60 font-black text-lg uppercase tracking-widest">
+                                Explore the legacy of IAESTE LC JECRC
+                            </p>
+                            <div className="w-24 h-2 bg-[#0B3D59] mx-auto mt-6 rounded-full" />
                         </motion.div>
-                    ) : (
-                        <motion.div
-                            key="detail"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="relative"
-                        >
-                            <button
-                                onClick={() => setSelectedCategory(null)}
-                                className="mb-6 flex items-center gap-2 px-6 py-3 bg-[#0B3D59] text-white rounded-full font-bold shadow-lg hover:bg-[#094b70] transition-colors fixed bottom-8 right-8 z-50 md:static md:bottom-auto md:right-auto"
-                            >
-                                <ArrowBackIcon fontSize="small" /> Back to Categories
-                            </button>
 
-                            <MasonryGrid items={selectedCategory.items} />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
+                        {/* Interactive Grid Categories */}
+                        <div className="max-w-[1600px] mx-auto px-6 pb-32">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
+                                {categories.map((cat) => (
+                                    <CategoryCard
+                                        key={cat.id}
+                                        category={cat}
+                                        onSelect={setSelectedCategory}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        key="gallery-detail"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="relative pt-32"
+                    >
+                        <div className="max-w-[1600px] mx-auto px-6">
+                            <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6 bg-[#0B3D59]/5 p-8 rounded-[3rem] border border-[#0B3D59]/10">
+                                <div>
+                                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-[#0B3D59] leading-none">
+                                        {selectedCategory.name}
+                                    </h2>
+                                    <p className="text-[#0B3D59]/60 font-black uppercase tracking-widest mt-4 flex items-center gap-3">
+                                        <span className="w-8 h-1 bg-[#0B3D59] rounded-full" />
+                                        Collection of {selectedCategory.items.length} Memories
+                                    </p>
+                                </div>
+                                <button
+                                    onClick={() => setSelectedCategory(null)}
+                                    className="flex items-center gap-3 px-8 py-4 bg-[#0B3D59] text-white rounded-2xl font-black hover:bg-[#0B3D59]/90 transition-all duration-300 shadow-xl shadow-[#0B3D59]/20"
+                                >
+                                    <ArrowBackIcon /> ALL CATEGORIES
+                                </button>
+                            </div>
+
+                            <MasonryGrid
+                                items={selectedCategory.items}
+                                driveLink={selectedCategory.driveLink}
+                            />
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             {/* Stylistic Background elements */}
-            <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 opacity-30">
-                <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-100 rounded-full blur-[100px]" />
-                <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-indigo-50 rounded-full blur-[100px]" />
+            <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden bg-white">
+                <div className="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] bg-blue-50/50 rounded-full blur-[120px]" />
+                <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-[#0B3D59]/5 rounded-full blur-[100px]" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#0B3D59_0.5px,transparent_0.5px)] [background-size:40px_40px] opacity-[0.05]" />
             </div>
         </div>
     );

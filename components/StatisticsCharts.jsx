@@ -502,16 +502,16 @@ export default function StatisticsCharts() {
             data-stats-section
           > 
             <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100">
-              <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Outgoing</p>
-              <p className="text-2xl sm:text-3xl font-bold text-[#003F68]">{animatedOutgoing}</p>
+              <p className="text-xs sm:text-sm text-gray-600 mb-1 text-center">Total Outgoing</p>
+              <p className="text-2xl sm:text-3xl font-bold text-[#003F68] text-center">{animatedOutgoing}</p>
             </div>
             <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100">
-              <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Incoming</p>
-              <p className="text-2xl sm:text-3xl font-bold text-[#ff7b2f]">{animatedIncoming}</p>
+              <p className="text-xs sm:text-sm text-gray-600 mb-1 text-center">Total Incoming</p>
+              <p className="text-2xl sm:text-3xl font-bold text-[#ff7b2f] text-center">{animatedIncoming}</p>
             </div>
             <div className="bg-white rounded-xl shadow-md p-4 sm:p-5 border border-gray-100">
-              <p className="text-xs sm:text-sm text-gray-600 mb-1">Total Internships</p>
-              <p className="text-2xl sm:text-3xl font-bold text-gray-800">{animatedCombined}</p>
+              <p className="text-xs sm:text-sm text-gray-600 mb-1 text-center">Total Internships</p>
+              <p className="text-2xl sm:text-3xl font-bold text-gray-800 text-center">{animatedCombined}</p>
             </div>
           </motion.div>
         </motion.div>
